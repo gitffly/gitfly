@@ -54,4 +54,35 @@ git reflog
 
 
 
-工作区中里的隐藏目录 `.git` 其实是版本库。版本库里有暂存区stage（或index），以及Git自动创建的第一个分支`master`，指向master的第一个指针即为`HEAD`。
+工作区中里的隐藏目录 `.git` 其实是版本库（Repository）。版本库里有暂存区stage（或index），以及Git自动创建的第一个分支`master`，指向master的第一个指针即为`HEAD`。
+
+![git-repo](E:\FLY\MyRepository\image\0)
+
+当我们把文件往Git版本库中添加时需要两步走：
+
+第一步：`git add`实际上就是将文件修改添加到缓存区；
+
+第二步：`git commit`实际上就是将缓存区的所有内容提交到当前分支（仓库）。
+
+
+
+```
+git status
+```
+
+做两次对比，对比工作区与暂存区，再对比暂存区与仓库，若不同则输出差别，若相同则输出`clean`。
+
+例如：
+
+<img src="E:\FLY\MyRepository\image\1" alt="image-20220404151602310" style="zoom:50%;" />
+
+如图此时修改了库的内容，但是没有进行`git add`，所有状态是`untracked`。
+
+当`git add`并`git commit`后：
+
+<img src="E:\FLY\MyRepository\image\2" alt="image-20220404152203642" style="zoom:50%;" />
+
+状态变为`clean`，即“干净”的工作区。
+
+
+
