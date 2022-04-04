@@ -19,7 +19,7 @@ git init
 修改与提交
 
 ```
-git add xxx文件名
+git add filename
 git commit -m "注释说明"
 ```
 
@@ -86,3 +86,94 @@ git status
 
 
 
+若未`git add`到暂存区，需要撤销对工作区的修改，回到最近一次`git add`或`git commit`时候的状态，只能用来撤回对已有文件内容的修改，文件的新建和删除无法撤销，使用：
+
+```
+git checkout -- filename
+```
+
+
+
+若已`git add`到暂存区，但未提交，需要撤销`git add`的操作，使用：
+
+```
+git reset HEAD fielname
+```
+
+
+
+提交删除文件操作
+
+```
+git rm filename
+```
+
+
+
+
+
+GitHub的使用
+
+一、准备工作
+
+（1）创建SSH Key（若已存在一般在`C:/users/username/.ssh`下，其中`id_rsa.pub`是公钥，`id_rsa`是私钥），若不存在可通过Git Bash创建:
+
+```
+ssh-keygen -t rsa -C "umail@exmple.com"
+```
+
+![image-20220404165247476](E:\FLY\MyRepository\image\3)
+
+（2）登录GitHub添加`Add SSH Key`
+
+![image-20220404165539253](E:\FLY\MyRepository\image\4)
+
+GitHub上免费托管的Git仓库任何人都可以看到（不要放敏感数据），但只有自己可以修改。若不想让别人看到则需要交保护费让GitHub把自己公开的仓库私有化。或自己动手搭一个Git服务器。
+
+二、添加远程库
+
+登录GitHub，添加远程库`Add Repository`，需要自己起个仓库名称即可。
+
+![image-20220404170304482](E:\FLY\MyRepository\image\5)
+
+添加后的仓库是空的，需要在本地的仓库下运行命令：
+
+```
+git remote add origin https://github.com/xxx
+git branch -M main
+//挂了梯子需要加，IP和端口号在梯子界面下面找
+git config --global http.proxy http://127.0.0.1:10809
+git config --global https.proxy http://127.0.0.1:10809
+//然后push
+git push -u origin main
+```
+
+<img src="E:\FLY\MyRepository\image\6" alt="image-20220404172147992" style="zoom: 50%;" />
+
+输入GitHub的账号和密码通过验证：
+
+<img src="E:\FLY\MyRepository\image\7" alt="image-20220404171413161" style="zoom: 25%;" />
+
+远程仓库创建完成！
+
+<img src="E:\FLY\MyRepository\image\8" alt="image-20220404172101825" style="zoom: 33%;" />
+
+三、删除远程库
+
+查看远程库信息
+
+```
+git remote -v
+```
+
+<img src="E:\FLY\MyRepository\image\9" alt="image-20220404174013233" style="zoom: 50%;" />
+
+然后根据名字删除库
+
+```
+git remote rm origin
+```
+
+此处的删除只是解除了本地与远程的绑定关系，并不是物理上地删除了远程库。远程库本身并没有任何改动，要真正删除远程库，需要登录到GitHub，在后台页面找到删除按钮再删除。
+
+<img src="E:\FLY\MyRepository\image\10" alt="image-20220404174604045" style="zoom: 33%;" />
